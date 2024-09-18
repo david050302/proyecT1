@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resúmenes de Libros</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
     <header>
         <div class="header-content">
             <a href="index.html" class="home-icon">
@@ -18,17 +17,20 @@
                 <input type="text" id="search" placeholder="Buscar libro...">
                 <div class="icons-container">
                     <span class="search-icon" onclick="searchBooks()">&#128269;</span>
-                    <span id="open-auth-modal" class="register-icon">&#128100;</span> 
+                    <span id="open-auth-modal" class="register-icon">&#128100;</span>
+                    <div id="user-info" style="display: none;">
+                        <span id="user-name"></span>
+                        <button id="logout-button">Cerrar sesión</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </header>
-
     <main>
         <section>
             <h2 class="section-title">Popular Del Día</h2>
             <div class="book-container" id="bookContainer">
-                
                 <div class="book" data-title="Moby Dick">
                     <img src="imagenes/Moby_Dick.jpg" alt="Moby Dick">
                     <h2>Moby Dick</h2>
@@ -53,7 +55,6 @@
                     <button onclick="loadContent('harry')">Ver Resumen</button>
                 </div>
 
-               
                 <div class="book" data-title="1984">
                     <img src="imagenes/1984.jpg" alt="1984">
                     <h2>1984</h2>
@@ -96,8 +97,6 @@
                     <button onclick="loadContent('donquijote')">Ver Resumen</button>
                 </div>
 
-               
-
                 <div class="book" data-title="Un cuento perfecto">
                     <img src="imagenes/cuento.jpeg" alt="un cuento perfecto">
                     <h2>Un cuento perfecto</h2>
@@ -116,13 +115,11 @@
                     <button onclick="loadContent('llueve')">Ver Resumen</button>
                 </div>
 
-
                 <div class="book" data-title="Los miserables">
                     <img src="imagenes/miserables.jpeg" alt="Los miserable">
                     <h2>Los miserable</h2>
                     <button onclick="loadContent('Miserables')">Ver Resumen</button>
                 </div>
-
 
                 <div class="book" data-title="La odisea">
                     <img src="imagenes/odisea.jpeg" alt="La odisea">
@@ -130,14 +127,11 @@
                     <button onclick="loadContent('odisea')">Ver Resumen</button>
                 </div>
 
-
                 <div class="book" data-title="un hombre llamado Ove">
                     <img src="imagenes/ove.webp" alt="Un hombre llamado Ove">
                     <h2>Un hombre llamado Ove</h2>
                     <button onclick="loadContent('Ove')">Ver Resumen</button>
                 </div>
-
-
 
                 <div class="book" data-title="El arte de conducir bajo la lluvia">
                     <img src="imagenes/perro.jpeg" alt="el arte de conducir bajo la lluvia">
@@ -145,13 +139,11 @@
                     <button onclick="loadContent('arte')">Ver Resumen</button>
                 </div>
 
-
                 <div class="book" data-title="romeo y Julieta">
                     <img src="imagenes/romeo.jpeg" alt="Romeo y Julieta">
                     <h2>Romeo y Julieta</h2>
                     <button onclick="loadContent('romeo')">Ver Resumen</button>
                 </div>
-
 
                 <div class="book" data-title="Hombre en busca de sentido">
                     <img src="imagenes/sentido.jpg" alt="Hombre en busca de sentido">
@@ -159,14 +151,12 @@
                     <button onclick="loadContent('sentido')">Ver Resumen</button>
                 </div>
 
-
                 <div class="book" data-title="bajo la puerto de los susurros">
                     <img src="imagenes/soledad.jpg" alt="bajo la puerta de los susurros">
                     <h2>Bajo la puerta de los susurros</h2>
                     <button onclick="loadContent('susurros')">Ver Resumen</button>
                 </div>
 
-               
                 <div class="book" data-title="Sherlock Holmes">
                     <img src="imagenes/sherlock.webp" alt="Sherlock Holmes">
                     <h2>Sherlock Holmes</h2>
@@ -179,7 +169,14 @@
     <footer>
         <p>Síguenos en nuestras redes sociales para más actualizaciones.</p>
     </footer>
-
+    <div id="book-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="book-summary">
+                <!-- El contenido del libro se cargará aquí -->
+            </div>
+        </div>
+    </div>
     <div id="auth-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -189,19 +186,18 @@
                     <h2>Iniciar Sesión</h2>
                     <input type="email" id="login-email" placeholder="Correo electrónico">
                     <input type="password" id="login-password" placeholder="Contraseña">
-                    <button onclick="login()">Iniciar Sesión</button>
+                    <button id="login-button">Iniciar Sesión</button>
                 </div>
                 <div id="register-form" class="auth-form" style="display: none;">
                     <h2>Registrarse</h2>
                     <input type="email" id="register-email" placeholder="Correo electrónico">
                     <input type="password" id="register-password" placeholder="Contraseña">
                     <input type="password" id="confirm-password" placeholder="Confirmar Contraseña">
-                    <button onclick="register()">Registrarse</button>
+                    <button id="register-button">Registrarse</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
