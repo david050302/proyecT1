@@ -6,16 +6,18 @@ const cors = require('cors');
 const session = require('express-session'); // Importa express-session
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Interbank24**',
-    database: 'david_server'
+// Configura la conexión a la base de datos
+const connection = mysql.createConnection({
+  host: process.env.JAWSDB_URL ? new URL(process.env.JAWSDB_URL).hostname : 'localhost',
+  user: process.env.JAWSDB_URL ? new URL(process.env.JAWSDB_URL).username : 'root',
+  password: process.env.JAWSDB_URL ? new URL(process.env.JAWSDB_URL).password : 'Interbank24**',
+  database: process.env.JAWSDB_URL ? new URL(process.env.JAWSDB_URL).pathname.substring(1) : 'david_server'
 });
 
-db.connect(err => {
+// Conecta a la base de datos
+connection.connect(err => {
     if (err) {
         console.error('Error al conectar a la base de datos:', err);
         return;
@@ -39,7 +41,7 @@ app.post('/register', (req, res) => {
     const hash = bcrypt.hashSync(password, 10);
 
     const query = 'INSERT INTO usuarios (email, password) VALUES (?, ?)';
-    db.query(query, [email, hash], (err, result) => {
+    connection.query(query, [email, hash], (err, result) => {
         if (err) {
             console.error('Error al registrar al usuario:', err);
             res.status(500).send('Error al registrar al usuario');
@@ -53,7 +55,7 @@ app.post('/login', (req, res) => {
     const { email, password } = req.body;
 
     const query = 'SELECT * FROM usuarios WHERE email = ?';
-    db.query(query, [email], (err, results) => {
+    connection.query(query, [email], (err, results) => {
         if (err) {
             console.error('Error al iniciar sesión:', err);
             res.status(500).send('Error al iniciar sesión');
@@ -89,5 +91,5 @@ app.post('/logout', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${port}`);
+    console.log(`Server is running on port ${port}`);
 });
